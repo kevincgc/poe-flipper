@@ -1,5 +1,5 @@
 
-public class Links {
+public final class Links {
 	//wisdom
 	public static final String BUY_WIS = "https://www.pathofexile.com/trade/exchange/Metamorph/JBVail";
 	public static final String SELL_WIS = "https://www.pathofexile.com/trade/exchange/Metamorph/3qpGU5";

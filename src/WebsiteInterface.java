@@ -35,4 +35,8 @@ public class WebsiteInterface {
 	public String getText (String xPath) {
 		return driver.findElement(By.xpath(xPath)).getText();
 	}
+	
+	public void goTo (String site) throws InterruptedException {
+		driver.get(site);
+	}
 }

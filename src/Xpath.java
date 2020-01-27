@@ -1,5 +1,5 @@
 
-public class Xpath {
+public final class Xpath {
 	public static final String[] BUY = {
 			"//*[@id=\"trade\"]/div[6]/div[2]/div[1]/div[1]/div/div[2]/span[3]/span[1]",
 			"//*[@id=\"trade\"]/div[6]/div[2]/div[2]/div[1]/div/div[2]/span[3]/span[1]",
