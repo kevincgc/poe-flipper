@@ -162,6 +162,66 @@ public class CurrencyRates {
 			buy = Links.BUY_P;
 			sell = Links.SELL_P;
 			break;
+		case "alt":
+			buy = Links.BUY_ALT;
+			sell = Links.SELL_ALT;
+			break;
+		case "fuse":
+			buy = Links.BUY_FUSE;
+			sell = Links.SELL_FUSE;
+			break;
+		case "jew":
+			buy = Links.BUY_JEW;
+			sell = Links.SELL_JEW;
+			break;
+		case "alch":
+			buy = Links.BUY_ALCH;
+			sell = Links.SELL_ALCH;
+			break;
+		case "gcp":
+			buy = Links.BUY_GCP;
+			sell = Links.SELL_GCP;
+			break;
+		case "chrom":
+			buy = Links.BUY_CHROM;
+			sell = Links.SELL_CHROM;
+			break;
+		case "chance":
+			buy = Links.BUY_CHANCE;
+			sell = Links.SELL_CHANCE;
+			break;
+		case "chisel":
+			buy = Links.BUY_CHISEL;
+			sell = Links.SELL_CHISEL;
+			break;
+		case "scour":
+			buy = Links.BUY_SCOUR;
+			sell = Links.SELL_SCOUR;
+			break;
+		case "divine":
+			buy = Links.BUY_DIVINE;
+			sell = Links.SELL_DIVINE;
+			break;
+		case "vaal":
+			buy = Links.BUY_VAAL;
+			sell = Links.SELL_VAAL;
+			break;
+		case "exa":
+			buy = Links.BUY_EXA;
+			sell = Links.SELL_EXA;
+			break;
+		case "regret":
+			buy = Links.BUY_REGRET;
+			sell = Links.SELL_REGRET;
+			break;
+		case "ba":
+			buy = Links.BUY_BA;
+			sell = Links.SELL_BA;
+			break;
+		case "silver":
+			buy = Links.BUY_SILVER;
+			sell = Links.SELL_SILVER;
+			break;			
 		default:
 			buy = "";
 			sell = "";

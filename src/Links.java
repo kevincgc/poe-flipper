@@ -40,7 +40,7 @@ public final class Links {
 	public static final String SELL_JEW = "https://www.pathofexile.com/trade/exchange/Metamorph/Yo07hY";
 	//alchemy
 	public static final String BUY_ALCH = "https://www.pathofexile.com/trade/exchange/Metamorph/rPe7CQ";
-	public static final String SELL_ALC = "https://www.pathofexile.com/trade/exchange/Metamorph/Rwoqi7";
+	public static final String SELL_ALCH = "https://www.pathofexile.com/trade/exchange/Metamorph/Rwoqi7";
 	//gcp
 	public static final String BUY_GCP = "https://www.pathofexile.com/trade/exchange/Metamorph/6oJbTG";
 	public static final String SELL_GCP = "https://www.pathofexile.com/trade/exchange/Metamorph/B22wf8";

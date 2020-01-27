@@ -6,15 +6,15 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		c = new CurrencyRates();
 		String currency, forumPost = "[spoiler]";
+		String[] currencies = {"wis", "port", "aug", "tra", "whe", "scr", "p", "blessed", "regal",
+				"alt", "fuse", "jew", "alch", "gcp", "chrom", "chance", "chisel", "scour",
+				"divine", "vaal", "exa", "regret", "ba", "silver"
+		};
 		print("======================running..");
 		
-		while (!checkRate("wis")) {};
-		while (!checkRate("port")) {};
-		while (!checkRate("aug")) {};
-		while (!checkRate("tra")) {};
-		while (!checkRate("whe")) {};
-		while (!checkRate("scr")) {};
-		while (!checkRate("p")) {};
+		for(String c: currencies) {
+			while (!checkRate(c)) {};
+		}
 		
 		c.postForum("c5f3823727b78c87a57178006d0662f3");
 		c.updateForum("test1234");
