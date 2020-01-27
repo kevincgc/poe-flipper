@@ -4,7 +4,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		CurrencyRates c = new CurrencyRates();
-		String currency;
+		String currency, forumPost = "[spoiler]";
 		print("======================running..");
 		
 		c.postForum("c5f3823727b78c87a57178006d0662f3");

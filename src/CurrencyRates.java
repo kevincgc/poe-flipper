@@ -1,7 +1,6 @@
 import java.io.IOException;
 
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.Cookie.Builder;
 
 public class CurrencyRates {
 	private static WebsiteInterface w = new WebsiteInterface();
@@ -41,13 +40,15 @@ public class CurrencyRates {
 		w.addCookie(cookie);
 		Thread.sleep(100);
 		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
-		Thread.sleep(1000);
+		Thread.sleep(1500);
 		w.takeScreenshot("forum");
 	}
 	
-	public boolean updateForum (String text) {
+	public boolean updateForum (String text) throws InterruptedException {
 		while (!(w.updateForum(text))) {
 		}
+		w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		Thread.sleep(1500);
 		return true;
 	}
 
@@ -55,7 +56,6 @@ public class CurrencyRates {
 		final double[] price, amount;
 		double results, sum = 0, count = 0, differencePercentage;
 		int index = 0;
-		maxDifferencePercentage = maxDifferencePercentage;
 
 		if (buyOrSell == "buy") {
 			price = buyPrice;
