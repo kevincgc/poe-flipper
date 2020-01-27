@@ -7,6 +7,9 @@ public class Main {
 		String currency;
 		print("======================running..");
 		
+		c.postForum("c5f3823727b78c87a57178006d0662f3");
+		c.updateForum("test123");
+		/*
 		currency = "wis";
 		c.parse(currency);
 		while(!c.isHasParsed()) {}
@@ -77,7 +80,7 @@ public class Main {
 		System.out.print(currency + ": " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");
 		System.out.print("buy: " + c.getLowestPrice("buy", 100, 50) + " " + currency + "/c   ");
 		System.out.print("sell: " + c.getLowestPrice("sell", 1000, 16) + " c/" + currency + "   ");
-		System.out.println();
+		System.out.println();*/
 
 		c.stopServer();
 		print("======================done..");

@@ -1,3 +1,7 @@
+import java.io.IOException;
+
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Cookie.Builder;
 
 public class CurrencyRates {
 	private static WebsiteInterface w = new WebsiteInterface();
@@ -25,6 +29,26 @@ public class CurrencyRates {
 
 	public boolean isHasParsed() {
 		return hasParsed;
+	}
+	
+	public void postForum (String sessionId) throws InterruptedException, IOException {
+		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
+		Cookie cookie = new Cookie.Builder("POESESSID", sessionId)
+				.domain(".pathofexile.com")
+				.path("/")
+				.isSecure(true)
+				.build();
+		w.addCookie(cookie);
+		Thread.sleep(100);
+		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
+		Thread.sleep(1000);
+		w.takeScreenshot("forum");
+	}
+	
+	public boolean updateForum (String text) {
+		while (!(w.updateForum(text))) {
+		}
+		return true;
 	}
 
 	public double getLowestPrice(String buyOrSell, int minAmount, double maxDifferencePercentage) {

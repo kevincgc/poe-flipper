@@ -29,4 +29,37 @@ public final class Links {
 	public static final String BUY_P = "https://www.pathofexile.com/trade/exchange/Metamorph/243DIk";
 	public static final String SELL_P = "https://www.pathofexile.com/trade/exchange/Metamorph/YpLRsY";
 	
+	/*
+	public static final String BUY_ALT = "https://www.pathofexile.com/trade/exchange/Metamorph/AjnbtX";
+	public static final String SELL_ALT =
+			
+	public static final String BUY_FUSE = "https://www.pathofexile.com/trade/exchange/Metamorph/jW58VLUX";
+	public static final String SELL_FUSE = 
+	
+	public static final String BUY_JEW = "https://www.pathofexile.com/trade/exchange/Metamorph/LgdYhn";
+	public static final String SELL_JEW
+	
+	public static final String BUY_ALCH = "https://www.pathofexile.com/trade/exchange/Metamorph/rPe7CQ";
+	public static final String SELL_ALC
+	
+	public static final String BUY_GCP
+	public static final String SELL_GCP
+	
+	public static final String BUY_CHROM
+	public static final String SELL_CHROM
+	
+	public static final String BUY_CHANCE
+	public static final String SELL_CHANCE
+	
+	public static final String BUY_CHISEL
+	public static final String SELL_CHISEL
+	
+	public static final String BUY_SCOUR
+	public static final String SELL_SCOUR
+	
+	public static final String BUY_DIVINE
+	public static final String SELL_DIVINE
+	
+	public static final String BUY_VAAL
+	public static final String SELL_VAAL*/
 }
