@@ -28,7 +28,7 @@ public class Main {
 		System.out.println(string);
 	}
 	
-	public static boolean checkRate (String currency) throws InterruptedException {
+	public static boolean checkRate (String currency) throws InterruptedException, IOException {
 		c.parse(currency);
 		while(!c.isHasParsed()) {}
 		System.out.print(currency + ": " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");

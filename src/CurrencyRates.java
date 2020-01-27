@@ -96,12 +96,13 @@ public class CurrencyRates {
 		return price[index];
 	}
 
-	public void parse(String currency) throws InterruptedException {
+	public void parse(String currency) throws InterruptedException, IOException {
 		hasParsed = false;
 		setCurrency(currency);
 
 		w.goTo(buy);
 		Thread.sleep(1500);
+		w.takeScreenshot("test1");
 		buyResults = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
 		buyResults = (buyResults > 20) ? 20 : buyResults;
 		for (int i = 0; i < buyResults; i++) {
