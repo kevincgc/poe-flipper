@@ -6,41 +6,22 @@ public class Main {
 		CurrencyRates c = new CurrencyRates();
 		print("======================running..");
 		
-		
 		c.parse("wis");
-		while(!c.isHasParsed()) {
-			
-		}
-		print(String.valueOf(c.getProfitRatio()));
+		while(!c.isHasParsed()) {}
+		System.out.print("Wis: " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");
+		System.out.print("buy: " + c.getLowestPrice("buy", 100, 50) + " wis/c   ");
+		System.out.print("sell: " + c.getLowestPrice("sell", 3000, 50) + " c/wis   ");
+		System.out.println();
+
 		c.parse("port");
-		while(!c.isHasParsed()) {
-			
-		}
-		print(String.valueOf(c.getProfitRatio()));
+		while(!c.isHasParsed()) {}
+		System.out.print("Port: " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");
+		System.out.print("buy: " + c.getLowestPrice("buy", 100, 50) + " port/c   ");
+		System.out.print("sell: " + c.getLowestPrice("sell", 3000, 50) + " c/port   ");
+		System.out.println();
 
-
+		c.stopServer();
 		print("======================done..");
-
-		// Get the login page
-
-//      // Search for username / password input and fill the inputs
-//      driver.findElement(By.xpath("//input[@name='acct']")).sendKeys(userName);
-//      driver.findElement(By.xpath("//input[@type='password']")).sendKeys(password);
-//        
-//      // Locate the login button and click on it
-//      driver.findElement(By.xpath("//input[@value='login']")).click();
-//        
-//      if(driver.getCurrentUrl().equals("https://news.ycombinator.com/login")){
-//       	System.out.println("Incorrect credentials");
-//       	driver.quit();
-//       	System.exit(1);
-//      }else{
-//       	System.out.println("Successfuly logged in");
-//      }
-//      
-
-		// Logout
-		// driver.findElement(By.id("logout")).click();
 	}
 
 	public static void print(String string) {

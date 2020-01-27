@@ -5,24 +5,18 @@ public class CurrencyRates {
 	private double[] buyPrice, sellPrice, buyAmount, sellAmount;
 	private double profit, profitRatio;
 	private boolean hasParsed;
-	private int results;
-	
+	private int buyResults, sellResults;
+
 	public CurrencyRates() throws InterruptedException {
 		hasParsed = false;
-		buyPrice = new double[20]; buyAmount = new double[20];
-		sellPrice = new double[20]; sellAmount = new double[20];
+		buyPrice = new double[20];
+		buyAmount = new double[20];
+		sellPrice = new double[20];
+		sellAmount = new double[20];
 	}
-	
+
 	public void stopServer() {
 		w.stopServer();
-	}
-
-	public double getBuyPrice(int index) {
-		return buyPrice[index];
-	}
-
-	public double getSellPrice(int index) {
-		return sellPrice[index];
 	}
 
 	public double getProfitRatio() {
@@ -32,37 +26,76 @@ public class CurrencyRates {
 	public boolean isHasParsed() {
 		return hasParsed;
 	}
-	
-	public void parse (String currency) throws InterruptedException {
+
+	public double getLowestPrice(String buyOrSell, int minAmount, double maxDifferencePercentage) {
+		final double[] price, amount;
+		double results, sum = 0, count = 0, differencePercentage;
+
+		if (buyOrSell == "buy") {
+			price = buyPrice;
+			amount = buyAmount;
+			results = buyResults;
+		} else if (buyOrSell == "sell") {
+			price = sellPrice;
+			amount = sellAmount;
+			results = sellResults;
+		} else {
+			return -1;
+		}
+
+		int index = 0;
+		for (int i = 0; i < 20; i++) {
+			if (amount[i] < minAmount) {
+				index = i;
+			} else {
+				break;
+			}
+		}
+		while (true) {
+			for (int i = 0; i < ((results - index < 5) ? (results - index) : 5); i++) {
+				sum += price[i + index];
+				count++;
+			}
+			double average = sum / count;
+			differencePercentage = (price[index] - average) / average * 100;
+			if (differencePercentage > maxDifferencePercentage) {
+				index++;
+			} else {
+				break;
+			}
+		}
+
+		return price[index];
+	}
+
+	public void parse(String currency) throws InterruptedException {
 		hasParsed = false;
 		setCurrency(currency);
-		
+
 		w.goTo(buy);
 		Thread.sleep(1500);
-		results = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
-		results = (results > 20) ? 20 : results;
-		for(int i = 0; i < results; i++) {
+		buyResults = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
+		buyResults = (buyResults > 20) ? 20 : buyResults;
+		for (int i = 0; i < buyResults; i++) {
 			buyPrice[i] = Double.parseDouble(w.getText(Xpath.BUY[i]));
 			buyAmount[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
 		}
-		
-		
+
 		w.goTo(sell);
 		Thread.sleep(1500);
-		results = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
-		results = (results > 20) ? 20 : results;
-		for(int i = 0; i < results; i++) {
+		sellResults = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
+		sellResults = (sellResults > 20) ? 20 : sellResults;
+		for (int i = 0; i < sellResults; i++) {
 			sellPrice[i] = Double.parseDouble(w.getText(Xpath.SELL[i]));
 			sellAmount[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
 		}
-		
 
 		profit = buyPrice[0] - sellPrice[0];
 		profitRatio = (profit / sellPrice[0]) * 100;
-		
+
 		hasParsed = true;
 	}
-	
+
 	private void setCurrency(String currency) {
 		switch (currency) {
 		case "wis":
