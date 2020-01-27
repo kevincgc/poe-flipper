@@ -1,0 +1,70 @@
+
+public class Xpath {
+	public static final String[] BUY = {
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[1]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[2]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[3]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[4]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[5]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[6]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[7]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[8]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[9]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[10]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[11]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[12]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[13]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[14]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[15]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[16]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[17]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[18]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[19]/div[1]/div/div[2]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[20]/div[1]/div/div[2]/span[3]/span[1]"
+	};
+	public static final String[] AMOUNT = {
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[1]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[2]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[3]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[4]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[5]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[6]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[7]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[8]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[9]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[10]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[11]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[12]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[13]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[14]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[15]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[16]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[17]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[18]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[19]/div[3]/div/div[1]/span[1]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[20]/div[3]/div/div[1]/span[1]/span[1]"
+	};
+	public static final String[] SELL = {
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[1]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[2]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[3]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[4]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[5]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[6]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[7]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[8]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[9]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[10]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[11]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[12]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[13]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[14]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[15]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[16]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[17]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[18]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[19]/div[1]/div/div[1]/span[3]/span[1]",
+			"//*[@id=\"trade\"]/div[6]/div[2]/div[20]/div[1]/div/div[1]/span[3]/span[1]"
+	};
+	public static final String RESULTS = "//*[@id=\"trade\"]/div[6]/div[1]/h3";
+}

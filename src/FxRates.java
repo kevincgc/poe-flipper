@@ -11,9 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.google.common.io.Files;
 
-public class ChromeHeadlessTest {
-	private static String userName = "";
-	private static String password = "";
+public class FxRates {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		String chromeDriverPath = "./bin/chromedriver.exe";
