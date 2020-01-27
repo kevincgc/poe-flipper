@@ -1,39 +1,18 @@
 
 public class CurrencyRates {
-	private WebsiteInterface w;
-	private String buy, sell, results;
-	private double[] buyPrice, sellPrice;
+	private static WebsiteInterface w = new WebsiteInterface();
+	private String buy, sell;
+	private double[] buyPrice, sellPrice, buyAmount, sellAmount;
 	private double profit, profitRatio;
 	private boolean hasParsed;
+	private int results;
 	
-	public CurrencyRates(String currency) throws InterruptedException {
+	public CurrencyRates() throws InterruptedException {
 		hasParsed = false;
-		buyPrice = new double[20];
-		sellPrice = new double[20];
-		w = new WebsiteInterface();
-		
-		setCurrency(currency);
-		
-		w.goTo(buy);
-		Thread.sleep(1500);
-		buyPrice[0] = Double.parseDouble(w.getText(Xpath.BUY[0]));
-		
-		w.goTo(sell);
-		Thread.sleep(1500);
-		sellPrice[0] = Double.parseDouble(w.getText(Xpath.SELL[0]));
-		
-		results = w.getText(Xpath.RESULTS);
-		profit = buyPrice[0] - sellPrice[0];
-		profitRatio = (profit / sellPrice[0]) * 100;
-		
-		w.stopServer();
-		hasParsed = true;
+		buyPrice = new double[20]; buyAmount = new double[20];
+		sellPrice = new double[20]; sellAmount = new double[20];
 	}
 	
-	public String getResults() {
-		return results;
-	}
-
 	public void stopServer() {
 		w.stopServer();
 	}
@@ -52,6 +31,36 @@ public class CurrencyRates {
 
 	public boolean isHasParsed() {
 		return hasParsed;
+	}
+	
+	public void parse (String currency) throws InterruptedException {
+		hasParsed = false;
+		setCurrency(currency);
+		
+		w.goTo(buy);
+		Thread.sleep(1500);
+		results = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
+		results = (results > 20) ? 20 : results;
+		for(int i = 0; i < results; i++) {
+			buyPrice[i] = Double.parseDouble(w.getText(Xpath.BUY[i]));
+			buyAmount[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
+		}
+		
+		
+		w.goTo(sell);
+		Thread.sleep(1500);
+		results = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
+		results = (results > 20) ? 20 : results;
+		for(int i = 0; i < results; i++) {
+			sellPrice[i] = Double.parseDouble(w.getText(Xpath.SELL[i]));
+			sellAmount[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
+		}
+		
+
+		profit = buyPrice[0] - sellPrice[0];
+		profitRatio = (profit / sellPrice[0]) * 100;
+		
+		hasParsed = true;
 	}
 	
 	private void setCurrency(String currency) {

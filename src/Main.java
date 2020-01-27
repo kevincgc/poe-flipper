@@ -3,18 +3,21 @@ import java.io.IOException;
 public class Main {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
-		CurrencyRates wis = new CurrencyRates("wis");
-		CurrencyRates port = new CurrencyRates("port");
+		CurrencyRates c = new CurrencyRates();
 		print("======================running..");
 		
-		while(!wis.isHasParsed() || !port.isHasParsed()) {
+		
+		c.parse("wis");
+		while(!c.isHasParsed()) {
 			
 		}
-		
-		print(String.valueOf(wis.getProfitRatio()));
-		print(String.valueOf(port.getProfitRatio()));
-		print("Results: " + port.getResults());
-		
+		print(String.valueOf(c.getProfitRatio()));
+		c.parse("port");
+		while(!c.isHasParsed()) {
+			
+		}
+		print(String.valueOf(c.getProfitRatio()));
+
 
 		print("======================done..");
 
