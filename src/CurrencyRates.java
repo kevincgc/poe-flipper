@@ -30,6 +30,8 @@ public class CurrencyRates {
 	public double getLowestPrice(String buyOrSell, int minAmount, double maxDifferencePercentage) {
 		final double[] price, amount;
 		double results, sum = 0, count = 0, differencePercentage;
+		int index = 0;
+		maxDifferencePercentage = maxDifferencePercentage;
 
 		if (buyOrSell == "buy") {
 			price = buyPrice;
@@ -43,7 +45,6 @@ public class CurrencyRates {
 			return -1;
 		}
 
-		int index = 0;
 		for (int i = 0; i < 20; i++) {
 			if (amount[i] < minAmount) {
 				index = i;
@@ -52,13 +53,16 @@ public class CurrencyRates {
 			}
 		}
 		while (true) {
-			for (int i = 0; i < ((results - index < 5) ? (results - index) : 5); i++) {
+			for (int i = 1; i < (((results - index) < 5) ? (results - index) : 5); i++) {
 				sum += price[i + index];
 				count++;
 			}
 			double average = sum / count;
-			differencePercentage = (price[index] - average) / average * 100;
+			//System.out.println("sum: " + sum + " count: " + count);
+			differencePercentage = Math.abs(price[index] - average) / average * 100;
 			if (differencePercentage > maxDifferencePercentage) {
+				sum = 0;
+				count = 0;
 				index++;
 			} else {
 				break;
