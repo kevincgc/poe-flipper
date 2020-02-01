@@ -1,8 +1,10 @@
+package Unused;
 import java.io.IOException;
 
 import org.openqa.selenium.Cookie;
 
-import Unused.Links;
+import WebsiteInterface;
+import Xpath;
 
 public class CurrencyRates {
 	private static WebsiteInterface w = new WebsiteInterface();
@@ -47,8 +49,8 @@ public class CurrencyRates {
 	}
 	
 	public boolean updateForum (String text) throws InterruptedException {
-		while (!(w.updateForum(text))) {
-		}
+		w.submitForum(text);
+		Thread.sleep(1000);
 		w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		Thread.sleep(1500);
 		return true;

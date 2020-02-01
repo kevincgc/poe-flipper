@@ -6,23 +6,35 @@ public class Currency {
 	private double[] buyPrice, sellPrice, buyAmount, sellAmount;
 	private double profit, profitRatio;
 	private boolean hasParsed, isOutdated;
+	private long lastUpdated;
 	
 	public Currency (String name, String buyLink, String sellLink) {
 		this.name = name;
 		this.buyLink = buyLink;
 		this.sellLink = sellLink;
 		hasParsed = false;
-		setOutdated(false);
+		isOutdated = true;
 		buyPrice = new double[20];
 		sellPrice = new double[20];
 		buyAmount = new double[20];
 		sellAmount = new double[20];
 	}
 	
-
+	public void calcProfit() {
+		profit = buyPrice[0] - sellPrice[0];
+		profitRatio = (profit / sellPrice[0]) * 100;
+	}
 	
 	
 	//==========================get/set===================================
+
+	public long getLastUpdated() {
+		return lastUpdated;
+	}
+
+	public void setLastUpdated(long lastUpdated) {
+		this.lastUpdated = lastUpdated;
+	}
 
 	public boolean isOutdated() {
 		return isOutdated;
@@ -82,5 +94,13 @@ public class Currency {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getBuyLink() {
+		return buyLink;
+	}
+
+	public String getSellLink() {
+		return sellLink;
 	}
 }

@@ -1,13 +1,20 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Unused.CurrencyRates;
+
 public class Main {
 	private static ArrayList<Currency> currencies;
 	private static CurrencyRates c;
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
+		//initiate currency
 		currencies = new ArrayList<Currency>();
 		initiateCurrency();
+		
+		//initiate website
+		WebsiteHandler handle = new WebsiteHandler();
+		
 		c = new CurrencyRates();
 		String currency, forumPost = "[spoiler]";
 		String[] currencies = {"wis", "port", "aug", "tra", "whe", "scr", "p", "blessed", "regal",

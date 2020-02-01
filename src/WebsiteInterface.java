@@ -45,11 +45,9 @@ public class WebsiteInterface {
 		driver.manage().addCookie(cookie);
 	}
 	
-	public boolean updateForum (String text) {
+	public void submitForum (String text) {
 		driver.findElement(By.xpath("//*[@id=\"content\"]")).clear();
 		driver.findElement(By.xpath("//*[@id=\"content\"]")).sendKeys(text);
 		driver.findElement(By.xpath("//*[@id=\"content\"]")).submit();
-		
-		return true;
 	}
 }
