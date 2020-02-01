@@ -1,3 +1,4 @@
+package Unused;
 
 public final class Links {
 	//wisdom

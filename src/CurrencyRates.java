@@ -2,6 +2,8 @@ import java.io.IOException;
 
 import org.openqa.selenium.Cookie;
 
+import Unused.Links;
+
 public class CurrencyRates {
 	private static WebsiteInterface w = new WebsiteInterface();
 	private String buy, sell;

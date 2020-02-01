@@ -18,6 +18,11 @@ public class Currency {
 		buyAmount = new double[20];
 		sellAmount = new double[20];
 	}
+	
+
+	
+	
+	//==========================get/set===================================
 
 	public boolean isOutdated() {
 		return isOutdated;
@@ -78,7 +83,4 @@ public class Currency {
 	public String getName() {
 		return name;
 	}
-
-
-
 }
