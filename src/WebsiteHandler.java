@@ -29,7 +29,7 @@ public class WebsiteHandler {
 		}
 		//sell
 		for(int i = 0; i < size; i++) {
-			text += "[spoiler=\" ~b/o 10/" + (int)(currencies.get(i).getSellPrice() * 10)
+			text += "[spoiler=\" ~b/o  10/" + (int)(currencies.get(i).getSellPrice() * 10)
 					+ " chaos\"][linkItem location=\"Stash18\" league=\"Metamorph\" x=\""
 					+ currencies.get(i).getSellX() + "\" y=\"" + currencies.get(i).getSellY() + "\"][/spoiler]";
 		}
@@ -50,10 +50,10 @@ public class WebsiteHandler {
 	public void parse(Currency currency) throws InterruptedException, IOException {
 		//go to site and parse buy/sell data
 		w.goTo(currency.getBuyLink());
-		Thread.sleep(1600);
+		Thread.sleep(1500);
 		parseCurrency(currency, Transaction.BUY);
 		w.goTo(currency.getSellLink());
-		Thread.sleep(1600);
+		Thread.sleep(1500);
 		parseCurrency(currency, Transaction.SELL);
 		
 		//update currency

@@ -30,7 +30,7 @@ public class Main {
 		
 		//sort by descending profit then add top 5 to bestCurrencies
 		Collections.sort(currencies, Collections.reverseOrder());
-		for(int i = 0; i < 3; i++) {
+		for(int i = 0; i < 2; i++) {
 			bestCurrencies.add(currencies.get(i));
 		}
 		
