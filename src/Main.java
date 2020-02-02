@@ -11,14 +11,8 @@ public class Main {
 		currencies = new ArrayList<Currency>();
 		initiateCurrency();
 		
-//		System.out.println("Enter POESESSID: ");
-//		Scanner in = new Scanner(System.in);
-//		POESESSID = in.nextLine();
-		
 		//initiate website
 		WebsiteHandler handle = new WebsiteHandler(POESESSID);
-
-		String currency, forumPost = "[spoiler]";
 
 		print("======================running..");
 		for (int i = 0; i < 4; i++) {
@@ -27,6 +21,8 @@ public class Main {
 			System.out.println(currencies.get(i).calcProfit());
 		}
 		
+		String forumPost = handle.updateShopThread(currencies, 4);
+		System.out.println(forumPost);
 		
 //		for(Currency c: currencies) {
 //			handle.parse(c);
@@ -52,7 +48,7 @@ public class Main {
 //	}
 	
 	private static Currency wis, port, aug, tra, whe, scr, p, blessed, regal, alt, fuse, jew, alch, gcp, 
-		chrom, chance, chisel, scour, divine, vaal, exa, regret, ba, silver;
+		chrom, chance, chisel, scour, divine, vaal, regret, ba, silver, exa;
 	private static void initiateCurrency () {
 		//wisdom
 		wis = new Currency("wis", "https://www.pathofexile.com/trade/exchange/Metamorph/JBVail",
@@ -136,10 +132,6 @@ public class Main {
 		vaal = new Currency("vaal", "https://www.pathofexile.com/trade/exchange/Metamorph/54XoTa",
 				"https://www.pathofexile.com/trade/exchange/Metamorph/poMXU0");
 		currencies.add(vaal);
-		//exalted
-		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/zavrGvU4",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/b8vDrLHL");
-		currencies.add(exa);
 		//regret
 		regret = new Currency("regret", "https://www.pathofexile.com/trade/exchange/Metamorph/q2qvCg",
 				"https://www.pathofexile.com/trade/exchange/Metamorph/L2yGun");
@@ -152,5 +144,9 @@ public class Main {
 		silver = new Currency("silver", "https://www.pathofexile.com/trade/exchange/Metamorph/p6XXt0",
 				"https://www.pathofexile.com/trade/exchange/Metamorph/q2YPCg");
 		currencies.add(silver);
+		//exalted
+		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/zavrGvU4",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/b8vDrLHL");
+		currencies.add(exa);
 	}
 }

@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 
 import org.openqa.selenium.Cookie;
 
@@ -18,21 +19,31 @@ public class WebsiteHandler {
 		//Thread.sleep(100);
 	}
 	
-	public boolean parse(Currency currency) throws InterruptedException, IOException {
+	public String updateShopThread (ArrayList<Currency> currencies, int size) {
+		String text = "[spoiler]";
+		for(int i = 0; i < size; i++) {
+			text += "[spoiler=\" ~b/o " + (int)(currencies.get(i).getBuyPrice() * 10) + "/10 " 
+					+ currencies.get(i).getName() + "\"][linkItem location=\"Stash18\" league=\"Metamorph\" x=\""
+					+ (i / 12) + " y=\"" + (i - (i / 12) * 12) + "\"]";
+		}
+		text += "[/spoiler]";
+		return text;
+	}
+	
+	public void parse(Currency currency) throws InterruptedException, IOException {
 		//go to site and parse buy/sell data
 		w.goTo(currency.getBuyLink());
-		Thread.sleep(2000);
+		Thread.sleep(1600);
 		parseCurrency(currency, Transaction.BUY);
 		w.goTo(currency.getSellLink());
-		Thread.sleep(2000);
+		Thread.sleep(1600);
 		parseCurrency(currency, Transaction.SELL);
 		
 		//update currency
+		currency.updateIndex();
 		currency.setHasParsed();
 		currency.setOutdated(false);
 		currency.setLastUpdated(Instant.now().getEpochSecond());
-		
-		return true;
 	}
 	
 	private void parseCurrency(Currency currency, Transaction t) {
@@ -54,11 +65,11 @@ public class WebsiteHandler {
 			stock[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
 		}
 		if (t == Transaction.BUY) {
-			currency.setBuyPrice(price);
-			currency.setBuyStock(stock);
+			currency.setBuyPriceArr(price);
+			currency.setBuyStockArr(stock);
 		} else {
-			currency.setSellPrice(price);
-			currency.setSellStock(stock);
+			currency.setSellPriceArr(price);
+			currency.setSellStockArr(stock);
 		}
 	}
 	
@@ -67,7 +78,7 @@ public class WebsiteHandler {
 	 * @param listing, the contents of the shop thread
 	 * @return bool, execution has completed
 	 */
-	public boolean updateForum (String listing) throws InterruptedException, IOException {
+	public void updateForum (String listing) throws InterruptedException, IOException {
 		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
 		Thread.sleep(1500);
 		w.takeScreenshot("forum");
@@ -75,8 +86,6 @@ public class WebsiteHandler {
 		Thread.sleep(1000);
 		w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		Thread.sleep(1000);
-		
-		return true;
 	}
 	
 	public void exit() {
