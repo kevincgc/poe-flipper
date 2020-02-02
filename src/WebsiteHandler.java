@@ -19,14 +19,31 @@ public class WebsiteHandler {
 		//Thread.sleep(100);
 	}
 	
-	public String updateShopThread (ArrayList<Currency> currencies, int size) {
+	public String updateShopThread (ArrayList<Currency> currencies, int size) throws InterruptedException, IOException {
 		String text = "[spoiler]";
+		//buy
 		for(int i = 0; i < size; i++) {
 			text += "[spoiler=\" ~b/o " + (int)(currencies.get(i).getBuyPrice() * 10) + "/10 " 
 					+ currencies.get(i).getName() + "\"][linkItem location=\"Stash18\" league=\"Metamorph\" x=\""
-					+ (i / 12) + " y=\"" + (i - (i / 12) * 12) + "\"]";
+					+ currencies.get(i).getBuyX() + "\" y=\"" + currencies.get(i).getBuyY() + "\"][/spoiler]";
+		}
+		//sell
+		for(int i = 0; i < size; i++) {
+			text += "[spoiler=\" ~b/o 10/" + (int)(currencies.get(i).getSellPrice() * 10)
+					+ " chaos\"][linkItem location=\"Stash18\" league=\"Metamorph\" x=\""
+					+ currencies.get(i).getSellX() + "\" y=\"" + currencies.get(i).getSellY() + "\"][/spoiler]";
 		}
 		text += "[/spoiler]";
+		
+		//go to shop thread, submit, update poe.trade
+		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
+		Thread.sleep(1500);
+		w.takeScreenshot("forum");
+		w.submitForum(text);
+		Thread.sleep(1000);
+		w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		Thread.sleep(1000);
+		
 		return text;
 	}
 	

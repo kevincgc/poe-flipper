@@ -1,11 +1,12 @@
 
-public class Currency {
+public class Currency implements Comparable<Currency>{
 	//get
 	private final String name;
 	private final String buyLink, sellLink;
 	private double profitRatio, buyPrice, sellPrice;
 	//set
 	private double[] buyPriceArr, sellPriceArr, buyStockArr, sellStockArr;
+	private int buyX, buyY, sellX, sellY;
 	//get+set
 	private int buyResults, sellResults;
 	private boolean hasParsed, isOutdated;
@@ -68,7 +69,7 @@ public class Currency {
 		sellIndex = getMinStockIndex(sellStockArr, 100);
 	}
 	
-	//==========================private===================================
+	//==========================internal===================================
 	
 	private double getLowestPrice(final double[] price, final double[] amount, final double results, int minAmount, double maxDifferencePercentage) {
 		double sum = 0, count = 0, differencePercentage;
@@ -112,6 +113,10 @@ public class Currency {
 		return stock.length - 1;
 	}
 	
+	@Override
+	public int compareTo(Currency o) {
+		return this.profitRatio < o.profitRatio ? -1 : (this.profitRatio > o.profitRatio ? 1: 0);
+	}
 	//==========================get/set===================================
 	public double getBuyPrice() {
 		return buyPrice;
@@ -192,4 +197,37 @@ public class Currency {
 	public String getSellLink() {
 		return sellLink;
 	}
+
+	public void setBuyX(int buyX) {
+		this.buyX = buyX;
+	}
+
+	public void setBuyY(int buyY) {
+		this.buyY = buyY;
+	}
+
+	public void setSellX(int sellX) {
+		this.sellX = sellX;
+	}
+
+	public void setSellY(int sellY) {
+		this.sellY = sellY;
+	}
+
+	public int getBuyX() {
+		return buyX;
+	}
+
+	public int getBuyY() {
+		return buyY;
+	}
+
+	public int getSellX() {
+		return sellX;
+	}
+
+	public int getSellY() {
+		return sellY;
+	}
+
 }

@@ -1,34 +1,43 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
-	private static ArrayList<Currency> currencies;
+	private static ArrayList<Currency> currencies = new ArrayList<Currency>(), bestCurrencies = new ArrayList<Currency>();
 	private static String POESESSID = "87499f6b8c0a84bf5c8a8e27c2074b71";
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		//initiate currency
-		currencies = new ArrayList<Currency>();
 		initiateCurrency();
+		for (int i = 0; i < currencies.size(); i++) {
+			currencies.get(i).setBuyX(i / 12);
+			currencies.get(i).setBuyY(i - (i / 12) * 12);
+			currencies.get(i).setSellX((i / 12) + 2);
+			currencies.get(i).setSellY(i - (i / 12) * 12);
+		}
 		
 		//initiate website
 		WebsiteHandler handle = new WebsiteHandler(POESESSID);
 
+		//main
 		print("======================running..");
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			handle.parse(currencies.get(i));
 			System.out.println(currencies.get(i).getName());
 			System.out.println(currencies.get(i).calcProfit());
 		}
 		
-		String forumPost = handle.updateShopThread(currencies, 4);
+		//sort by descending profit then add top 5 to bestCurrencies
+		Collections.sort(currencies, Collections.reverseOrder());
+		for(int i = 0; i < 3; i++) {
+			bestCurrencies.add(currencies.get(i));
+		}
+		
+		String forumPost = handle.updateShopThread(bestCurrencies, bestCurrencies.size());
 		System.out.println(forumPost);
 		
-//		for(Currency c: currencies) {
-//			handle.parse(c);
-//			
-//		}
-		
+		//cleanup
 		handle.exit();
 		print("======================done..");
 	}
