@@ -3,11 +3,6 @@ import java.time.Instant;
 
 import org.openqa.selenium.Cookie;
 
-enum Transaction {
-	BUY,
-	SELL
-}
-
 public class WebsiteHandler {
 	private static WebsiteInterface w = new WebsiteInterface(); //limit to 1 instance of headless chrome running
 	
@@ -26,10 +21,10 @@ public class WebsiteHandler {
 	public boolean parse(Currency currency) throws InterruptedException, IOException {
 		//go to site and parse buy/sell data
 		w.goTo(currency.getBuyLink());
-		Thread.sleep(1500);
+		Thread.sleep(2000);
 		parseCurrency(currency, Transaction.BUY);
 		w.goTo(currency.getSellLink());
-		Thread.sleep(1500);
+		Thread.sleep(2000);
 		parseCurrency(currency, Transaction.SELL);
 		
 		//update currency
@@ -42,7 +37,7 @@ public class WebsiteHandler {
 	
 	private void parseCurrency(Currency currency, Transaction t) {
 		double[] price = new double[20]; 
-		double[] amount = new double[20];
+		double[] stock = new double[20];
 		
 		//get # of sellers
 		int results = Integer.parseInt(w.getText(Xpath.RESULTS).replaceAll("[\\D]", ""));
@@ -56,14 +51,14 @@ public class WebsiteHandler {
 		//store array of results
 		for (int i = 0; i < results; i++) {
 			price[i] = Double.parseDouble(w.getText((t == Transaction.BUY) ? Xpath.BUY[i] : Xpath.SELL[i]));
-			amount[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
+			stock[i] = Double.parseDouble(w.getText(Xpath.AMOUNT[i]));
 		}
 		if (t == Transaction.BUY) {
 			currency.setBuyPrice(price);
-			currency.setBuyAmount(amount);
+			currency.setBuyStock(stock);
 		} else {
 			currency.setSellPrice(price);
-			currency.setSellAmount(amount);
+			currency.setSellStock(stock);
 		}
 	}
 	

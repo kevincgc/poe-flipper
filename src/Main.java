@@ -1,37 +1,39 @@
 import java.io.IOException;
 import java.util.ArrayList;
-
-import Unused.CurrencyRates;
+import java.util.Scanner;
 
 public class Main {
 	private static ArrayList<Currency> currencies;
-	private static CurrencyRates c;
+	private static String POESESSID = "87499f6b8c0a84bf5c8a8e27c2074b71";
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		//initiate currency
 		currencies = new ArrayList<Currency>();
 		initiateCurrency();
 		
+//		System.out.println("Enter POESESSID: ");
+//		Scanner in = new Scanner(System.in);
+//		POESESSID = in.nextLine();
+		
 		//initiate website
-		WebsiteHandler handle = new WebsiteHandler();
-		
-		c = new CurrencyRates();
+		WebsiteHandler handle = new WebsiteHandler(POESESSID);
+
 		String currency, forumPost = "[spoiler]";
-		String[] currencies = {"wis", "port", "aug", "tra", "whe", "scr", "p", "blessed", "regal",
-				"alt", "fuse", "jew", "alch", "gcp", "chrom", "chance", "chisel", "scour",
-				"divine", "vaal", "exa", "regret", "ba", "silver"
-		};
+
 		print("======================running..");
-		
-		for(String c: currencies) {
-			while (!checkRate(c)) {};
+		for (int i = 0; i < 4; i++) {
+			handle.parse(currencies.get(i));
+			System.out.println(currencies.get(i).getName());
+			System.out.println(currencies.get(i).calcProfit());
 		}
 		
-		c.postForum("c5f3823727b78c87a57178006d0662f3");
-		c.updateForum("test1234");
 		
+//		for(Currency c: currencies) {
+//			handle.parse(c);
+//			
+//		}
 		
-		c.stopServer();
+		handle.exit();
 		print("======================done..");
 	}
 
@@ -39,15 +41,15 @@ public class Main {
 		System.out.println(string);
 	}
 	
-	public static boolean checkRate (String currency) throws InterruptedException, IOException {
-		c.parse(currency);
-		while(!c.isHasParsed()) {}
-		System.out.print(currency + ": " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");
-		System.out.print("buy: " + c.getLowestPrice("buy", 100, 50) + " " + currency + "/c   ");
-		System.out.print("sell: " + c.getLowestPrice("sell", 1000, 16) + " c/" + currency + "   ");
-		System.out.println();
-		return true;
-	}
+//	public static boolean checkRate (String currency) throws InterruptedException, IOException {
+//		c.parse(currency);
+//		while(!c.isHasParsed()) {}
+//		System.out.print(currency + ": " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");
+//		System.out.print("buy: " + c.getLowestPrice("buy", 100, 50) + " " + currency + "/c   ");
+//		System.out.print("sell: " + c.getLowestPrice("sell", 1000, 16) + " c/" + currency + "   ");
+//		System.out.println();
+//		return true;
+//	}
 	
 	private static Currency wis, port, aug, tra, whe, scr, p, blessed, regal, alt, fuse, jew, alch, gcp, 
 		chrom, chance, chisel, scour, divine, vaal, exa, regret, ba, silver;
