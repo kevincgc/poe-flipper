@@ -10,13 +10,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		//initiate currency
 		initiateCurrency();
-		for (int i = 0; i < currencies.size(); i++) {
-			currencies.get(i).setBuyX(i / 12);
-			currencies.get(i).setBuyY(i - (i / 12) * 12);
-			currencies.get(i).setSellX((i / 12) + 2);
-			currencies.get(i).setSellY(i - (i / 12) * 12);
-		}
-		
+
 		//initiate website
 		WebsiteHandler handle = new WebsiteHandler(POESESSID);
 
@@ -24,18 +18,23 @@ public class Main {
 		print("======================running..");
 		for (int i = 0; i < currencies.size(); i++) {
 			handle.parse(currencies.get(i));
+			currencies.get(i).calcBuyPrice();
+			currencies.get(i).calcSellPrice();
+			currencies.get(i).calcProfit();
 			System.out.println(currencies.get(i));
 		}
 		
-		//sort by descending profit then add top 5 to bestCurrencies
+		//sort by descending profit then sell those with profit ratio > 40%
 		Collections.sort(currencies, Collections.reverseOrder());
-		for(int i = 0; i < 2; i++) {
-			bestCurrencies.add(currencies.get(i));
-			System.out.print(currencies.get(i).getName() + " ^ ");
+		for(Currency c: currencies) {
+			if (c.getProfitRatio() > 40) {
+				bestCurrencies.add(c);
+				System.out.print(c.getName() + " ^ ");
+			}
 		}
-		System.out.println();
+		
 		String forumPost = handle.updateShopThread(bestCurrencies, bestCurrencies.size());
-		System.out.println(forumPost);
+		System.out.println("\n" + forumPost);
 		
 		//cleanup
 		handle.exit();
@@ -45,16 +44,6 @@ public class Main {
 	public static void print(String string) {
 		System.out.println(string);
 	}
-	
-//	public static boolean checkRate (String currency) throws InterruptedException, IOException {
-//		c.parse(currency);
-//		while(!c.isHasParsed()) {}
-//		System.out.print(currency + ": " + String.valueOf(Math.round(c.getProfitRatio() * 10) / 10.0) + "%   ");
-//		System.out.print("buy: " + c.getLowestPrice("buy", 100, 50) + " " + currency + "/c   ");
-//		System.out.print("sell: " + c.getLowestPrice("sell", 1000, 16) + " c/" + currency + "   ");
-//		System.out.println();
-//		return true;
-//	}
 	
 	private static Currency wis, port, aug, tra, whe, scr, p, blessed, regal, alt, fuse, jew, alch, gcp, 
 		chrom, chance, chisel, scour, divine, vaal, regret, ba, silver, exa;
@@ -157,5 +146,12 @@ public class Main {
 		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/glRewPiQ",
 				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip");
 		currencies.add(exa);
+		
+		for (int i = 0; i < currencies.size(); i++) {
+			currencies.get(i).setBuyX(i / 12);
+			currencies.get(i).setBuyY(i - (i / 12) * 12);
+			currencies.get(i).setSellX((i / 12) + 2);
+			currencies.get(i).setSellY(i - (i / 12) * 12);
+		}
 	}
 }

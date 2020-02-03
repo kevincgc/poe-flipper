@@ -40,26 +40,28 @@ public class Currency implements Comparable<Currency>{
 	}
 
 	public double calcProfit() {
-		buyPrice = buyPriceArr[buyIndex];
-		sellPrice = sellPriceArr[sellIndex];
 		double profit = buyPriceArr[buyIndex] - sellPriceArr[sellIndex];
 		profitRatio = (int)((profit / sellPriceArr[sellIndex]) * 1000);
 		profitRatio = profitRatio / 10;
 		return profitRatio;
 	}
 	
-	public double calcBuyPrice(double maxDifferencePercentage) {
-		return getLowestPrice(buyPriceArr, buyStockArr, buyResults, minStock, maxDifferencePercentage);
-	}
 	public double calcBuyPrice() {
-		return calcBuyPrice(20);
+		buyPrice = buyPriceArr[buyIndex];
+		
+		return buyPrice;
 	}
 	
-	public double calcSellPrice(double maxDifferencePercentage) {
-		return getLowestPrice(sellPriceArr, sellStockArr, sellResults, 40, maxDifferencePercentage);
-	}
 	public double calcSellPrice() {
-		return calcSellPrice(20);
+		if (sellResults > 20 && sellIndex < 12)  {
+			sellPrice = sellPriceArr[sellIndex + 6];
+		} else if (sellResults > 20 && sellIndex > 12) {
+			sellPrice = sellPriceArr[15];
+		} else {
+			sellPrice = sellPriceArr[sellIndex + 1];
+		}
+		
+		return sellPrice;
 	}
 	
 	public void updateIndex() {
