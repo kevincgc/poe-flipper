@@ -88,14 +88,11 @@ public class WebsiteHandler {
 	/**
 	 * Go to shop thread, take a screenshot to troubleshoot, enter text and submit,
 	 * then refresh poe.trade.
-	 * 
-	 * @param listing, the contents of the shop thread
-	 * @return bool, execution has completed
 	 */
 	public void updateForum(String listing) throws InterruptedException, IOException {
 		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
 		Thread.sleep(1500);
-		w.takeScreenshot("forum");
+		//w.takeScreenshot("forum");
 		w.submitForum(listing);
 		Thread.sleep(1000);
 		w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");

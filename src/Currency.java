@@ -6,13 +6,12 @@ public class Currency implements Comparable<Currency>{
 	private double profitRatio, buyPrice, sellPrice;
 	//set
 	private double[] buyPriceArr, sellPriceArr, buyStockArr, sellStockArr;
-	private int buyX, buyY, sellX, sellY;
+	private int buyX, buyY, sellX, sellY, minStock, offset;
 	//get+set
 	private int buyResults, sellResults;
 	private boolean hasParsed, isOutdated;
 	private long lastUpdated;
 	//internal
-	private int minStock, offset;
 	private int buyIndex, sellIndex;
 	
 	public Currency (String name, String buyLink, String sellLink) {
@@ -27,16 +26,6 @@ public class Currency implements Comparable<Currency>{
 		sellStockArr = new double[20];
 		minStock = Defines.DEFAULT_MINIMUM_STOCK;
 		offset = 0;
-	}
-	
-	public Currency (String name, String buyLink, String sellLink, int offset) {
-		this(name, buyLink, sellLink);
-		this.offset = offset;
-	}
-	
-	public Currency (String name, String buyLink, String sellLink, int offset, int minAmount) {
-		this(name, buyLink, sellLink, offset);
-		this.minStock = minAmount;
 	}
 
 	public double calcProfit() {
@@ -120,6 +109,14 @@ public class Currency implements Comparable<Currency>{
 		return this.profitRatio < o.profitRatio ? -1 : (this.profitRatio > o.profitRatio ? 1: 0);
 	}
 	//==========================get/set===================================
+	public void setMinStock(int minStock) {
+		this.minStock = minStock;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+	
 	public double getBuyPrice() {
 		return buyPrice;
 	}

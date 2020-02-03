@@ -125,7 +125,9 @@ public class Main {
 		currencies.add(scour);
 		//divine
 		divine = new Currency("divine", "https://www.pathofexile.com/trade/exchange/Metamorph/NpeJc0",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/9z28fK", 3, 1);
+				"https://www.pathofexile.com/trade/exchange/Metamorph/9z28fK");
+		divine.setMinStock(2);
+		divine.setOffset(2);
 		currencies.add(divine);
 		//vaal
 		vaal = new Currency("vaal", "https://www.pathofexile.com/trade/exchange/Metamorph/EB9LC5",
@@ -145,7 +147,9 @@ public class Main {
 		currencies.add(silver);
 		//exalted
 		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/glRewPiQ",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip", 3, 3);
+				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip");
+		exa.setMinStock(3);
+		exa.setOffset(5);
 		currencies.add(exa);
 		
 		for (int i = 0; i < currencies.size(); i++) {
