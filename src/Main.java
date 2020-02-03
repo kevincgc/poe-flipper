@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 	private static ArrayList<Currency> currencies = new ArrayList<Currency>(), profitableCurrencies = new ArrayList<Currency>();
-	
-	
+		
 	public static void main(String[] args) throws IOException, InterruptedException {
 		//initiate currency
 		initiateCurrency();
@@ -23,11 +22,11 @@ public class Main {
 			currencies.get(i).calcProfit();
 			System.out.println(currencies.get(i));
 		}
-		
+
 		//sort by descending profit then sell those with profit ratio > 40%
 		Collections.sort(currencies, Collections.reverseOrder());
+		System.out.print("Selected profitable currencies: ");
 		for(Currency c: currencies) {
-			System.out.print("Selected profitable currencies: ");
 			if (c.getProfitRatio() > Defines.LOWEST_ALLOWED_PROFIT_RATIO) {
 				profitableCurrencies.add(c);
 				System.out.print(c.getName() + ", ");
@@ -126,8 +125,7 @@ public class Main {
 		//divine
 		divine = new Currency("divine", "https://www.pathofexile.com/trade/exchange/Metamorph/NpeJc0",
 				"https://www.pathofexile.com/trade/exchange/Metamorph/9z28fK");
-		divine.setMinStock(2);
-		divine.setOffset(2);
+
 		currencies.add(divine);
 		//vaal
 		vaal = new Currency("vaal", "https://www.pathofexile.com/trade/exchange/Metamorph/EB9LC5",
@@ -148,8 +146,7 @@ public class Main {
 		//exalted
 		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/glRewPiQ",
 				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip");
-		exa.setMinStock(3);
-		exa.setOffset(5);
+
 		currencies.add(exa);
 		
 		for (int i = 0; i < currencies.size(); i++) {
@@ -158,5 +155,10 @@ public class Main {
 			currencies.get(i).setSellX((i / 12) + 2);
 			currencies.get(i).setSellY(i - (i / 12) * 12);
 		}
+		divine.setMinStock(2);
+		divine.setOffset(2);
+		exa.setMinStock(3);
+		exa.setOffset(5);
+		aug.setOverrideSellPrice(8);
 	}
 }

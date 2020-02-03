@@ -17,17 +17,26 @@ public class WebsiteHandler {
 	}
 
 	public void parse(Currency currency) throws InterruptedException, IOException {
-		try {
-			// go to site and parse buy/sell data
-			w.goTo(currency.getBuyLink());
-			Thread.sleep(1500);
-			parseCurrency(currency, Transaction.BUY);
-			w.goTo(currency.getSellLink());
-			Thread.sleep(1500);
-			parseCurrency(currency, Transaction.SELL);
-		} catch (NoSuchElementException e) {
-			System.out.println("NoSuchElementException in " + currency.getName() + ", exiting..");
-			exit();
+		int count = 0;
+		int sleepDelay = 1500;
+		while (true) {
+			try {
+				// go to site and parse buy/sell data
+				w.goTo(currency.getBuyLink());
+				Thread.sleep(sleepDelay);
+				parseCurrency(currency, Transaction.BUY);
+				w.goTo(currency.getSellLink());
+				Thread.sleep(sleepDelay);
+				parseCurrency(currency, Transaction.SELL);
+				break;
+			} catch (NoSuchElementException e) {
+				sleepDelay += 500;
+				System.out.println("NoSuchElementException in " + currency.getName() + ", retrying..");
+				if (++count == 2) {
+					System.out.println("NoSuchElementException in " + currency.getName() + ", exiting..");
+					exit();
+				}
+			}
 		}
 
 		// update currency
@@ -90,13 +99,28 @@ public class WebsiteHandler {
 	 * then refresh poe.trade.
 	 */
 	public void updateForum(String listing) throws InterruptedException, IOException {
-		w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
-		Thread.sleep(1500);
-		//w.takeScreenshot("forum");
-		w.submitForum(listing);
-		Thread.sleep(1000);
-		w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		Thread.sleep(1000);
+		int count = 0;
+		int sleepDelay = 1000;
+		while (true) {
+			try {
+				w.goTo("https://www.pathofexile.com/forum/edit-thread/2753867");
+				Thread.sleep(sleepDelay);
+				//w.takeScreenshot("forum");
+				w.submitForum(listing);
+				Thread.sleep(sleepDelay);
+				w.goTo("https://verify.poe.trade/2753867/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				Thread.sleep(sleepDelay);
+				break;
+			} catch (NoSuchElementException e) {
+				sleepDelay += 500;
+				System.out.println("NoSuchElementException updating forum, retrying..");
+				if (++count == 2) {
+					System.out.println("NoSuchElementException updating forum, exiting..");
+					exit();
+				}
+			}
+		}
+
 	}
 
 	public void exit() {

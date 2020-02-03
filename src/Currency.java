@@ -1,20 +1,21 @@
 
-public class Currency implements Comparable<Currency>{
-	//get
+public class Currency implements Comparable<Currency> {
+	// get
 	private final String name;
 	private final String buyLink, sellLink;
 	private double profitRatio, buyPrice, sellPrice;
-	//set
+	// set
 	private double[] buyPriceArr, sellPriceArr, buyStockArr, sellStockArr;
 	private int buyX, buyY, sellX, sellY, minStock, offset;
-	//get+set
+	private double overrideSellPrice, overrideBuyPrice;
+	// get+set
 	private int buyResults, sellResults;
 	private boolean hasParsed, isOutdated;
 	private long lastUpdated;
-	//internal
+	// internal
 	private int buyIndex, sellIndex;
-	
-	public Currency (String name, String buyLink, String sellLink) {
+
+	public Currency(String name, String buyLink, String sellLink) {
 		this.name = name;
 		this.buyLink = buyLink;
 		this.sellLink = sellLink;
@@ -26,6 +27,8 @@ public class Currency implements Comparable<Currency>{
 		sellStockArr = new double[20];
 		minStock = Defines.DEFAULT_MINIMUM_STOCK;
 		offset = 0;
+		overrideSellPrice = 0;
+		overrideBuyPrice = 0;
 	}
 
 	public double calcProfit() {
@@ -33,33 +36,51 @@ public class Currency implements Comparable<Currency>{
 		profitRatio = Math.round((profit / sellPriceArr[sellIndex]) * 1000) / 10;
 		return profitRatio;
 	}
-	
+
 	public double calcBuyPrice() {
-		buyPrice = buyPriceArr[buyIndex];
-		
+		if (overrideBuyPrice == 0) {
+			if (buyResults >= 10 && buyIndex == 0) {
+				buyPrice = buyPriceArr[3];
+			} else if (buyResults - buyIndex <= 2){
+				buyPrice = buyPriceArr[buyIndex];
+			} else {
+				buyPrice = buyPriceArr[buyIndex + 1];
+			}
+		} else {
+			buyPrice = overrideBuyPrice;
+		}
+
+
 		return buyPrice;
 	}
-	
+
 	public double calcSellPrice() {
-		if (sellResults > 20 && sellIndex < 12)  {
-			sellPrice = sellPriceArr[sellIndex + 6];
-		} else if (sellResults > 20 && sellIndex > 12) {
-			sellPrice = sellPriceArr[15];
+		if (overrideSellPrice == 0) {
+			if (sellResults >= 20 && sellIndex <= 2) {
+				sellPrice = sellPriceArr[sellIndex + 10];
+			} else if (sellResults >= 20 && sellIndex <= 13) {
+				sellPrice = sellPriceArr[sellIndex + 6];
+			} else if (sellResults >= 20 && sellIndex > 13) {
+				sellPrice = sellPriceArr[15];
+			} else {
+				sellPrice = sellPriceArr[sellIndex];
+			}
 		} else {
-			sellPrice = sellPriceArr[sellIndex];
+			sellPrice = overrideSellPrice;
 		}
-		
+
 		return sellPrice;
 	}
-	
+
 	public void updateIndex() {
 		buyIndex = getMinStockIndex(buyStockArr, minStock);
 		sellIndex = getMinStockIndex(sellStockArr, Defines.MINIMUM_BUYER_CHAOS);
 	}
-	
-	//==========================internal===================================
-	
-	private double getLowestPrice(final double[] price, final double[] amount, final double results, int minAmount, double maxDifferencePercentage) {
+
+	// ==========================internal===================================
+
+	private double getLowestPrice(final double[] price, final double[] amount, final double results, int minAmount,
+			double maxDifferencePercentage) {
 		double sum = 0, count = 0, differencePercentage;
 		int index = 0;
 
@@ -69,7 +90,7 @@ public class Currency implements Comparable<Currency>{
 				count++;
 			}
 			double average = sum / count;
-			//System.out.println("sum: " + sum + " count: " + count);
+			// System.out.println("sum: " + sum + " count: " + count);
 			differencePercentage = Math.abs(price[index] - average) / average * 100;
 			if (differencePercentage > maxDifferencePercentage) {
 				sum = 0;
@@ -82,16 +103,17 @@ public class Currency implements Comparable<Currency>{
 
 		return price[index];
 	}
-	
-	private int getMinStockIndex (double[] stock, int minStock) {
+
+	private int getMinStockIndex(double[] stock, int minStock) {
 		for (int i = 0; i < stock.length; i++) {
 			if (stock[i] > minStock) {
 				return i + offset;
 			}
 		}
-		
+
 		return stock.length - 1;
 	}
+
 	@Override
 	public String toString() {
 		calcProfit();
@@ -100,15 +122,16 @@ public class Currency implements Comparable<Currency>{
 		str += "Selected buy: " + buyPrice + " " + name + "/c   ";
 		str += "Lowest sell: " + sellPriceArr[sellIndex] + " c/" + name;
 		str += "Selected sell: " + sellPrice + " c/" + name;
-		
+
 		return str;
 	}
-	
+
 	@Override
 	public int compareTo(Currency o) {
-		return this.profitRatio < o.profitRatio ? -1 : (this.profitRatio > o.profitRatio ? 1: 0);
+		return this.profitRatio < o.profitRatio ? -1 : (this.profitRatio > o.profitRatio ? 1 : 0);
 	}
-	//==========================get/set===================================
+
+	// ==========================get/set===================================
 	public void setMinStock(int minStock) {
 		this.minStock = minStock;
 	}
@@ -116,7 +139,15 @@ public class Currency implements Comparable<Currency>{
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
-	
+
+	public void setOverrideSellPrice(double overrideSellPrice) {
+		this.overrideSellPrice = overrideSellPrice;
+	}
+
+	public void setOverrideBuyPrice(double overrideBuyPrice) {
+		this.overrideBuyPrice = overrideBuyPrice;
+	}
+
 	public double getBuyPrice() {
 		return buyPrice;
 	}
@@ -124,7 +155,7 @@ public class Currency implements Comparable<Currency>{
 	public double getSellPrice() {
 		return sellPrice;
 	}
-	
+
 	public long getLastUpdated() {
 		return lastUpdated;
 	}
@@ -136,7 +167,7 @@ public class Currency implements Comparable<Currency>{
 	public double getProfitRatio() {
 		return profitRatio;
 	}
-	
+
 	public boolean isOutdated() {
 		return isOutdated;
 	}
@@ -168,7 +199,7 @@ public class Currency implements Comparable<Currency>{
 	public void setSellResults(int sellResults) {
 		this.sellResults = sellResults;
 	}
-	
+
 	public void setBuyPriceArr(double[] buyPrice) {
 		this.buyPriceArr = buyPrice;
 	}
