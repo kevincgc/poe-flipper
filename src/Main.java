@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
-	private static ArrayList<Currency> currencies = new ArrayList<Currency>(), bestCurrencies = new ArrayList<Currency>();
-	private static String POESESSID = "87499f6b8c0a84bf5c8a8e27c2074b71";
+	private static ArrayList<Currency> currencies = new ArrayList<Currency>(), profitableCurrencies = new ArrayList<Currency>();
+	
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		//initiate currency
 		initiateCurrency();
 
 		//initiate website
-		WebsiteHandler handle = new WebsiteHandler(POESESSID);
+		WebsiteHandler handle = new WebsiteHandler(Defines.POESESSID);
 
 		//main
 		print("======================running..");
@@ -27,13 +27,14 @@ public class Main {
 		//sort by descending profit then sell those with profit ratio > 40%
 		Collections.sort(currencies, Collections.reverseOrder());
 		for(Currency c: currencies) {
-			if (c.getProfitRatio() > 40) {
-				bestCurrencies.add(c);
-				System.out.print(c.getName() + " ^ ");
+			System.out.print("Selected profitable currencies: ");
+			if (c.getProfitRatio() > Defines.LOWEST_ALLOWED_PROFIT_RATIO) {
+				profitableCurrencies.add(c);
+				System.out.print(c.getName() + ", ");
 			}
 		}
 		
-		String forumPost = handle.updateShopThread(bestCurrencies, bestCurrencies.size());
+		String forumPost = handle.updateShopThread(profitableCurrencies, profitableCurrencies.size());
 		System.out.println("\n" + forumPost);
 		
 		//cleanup
@@ -124,7 +125,7 @@ public class Main {
 		currencies.add(scour);
 		//divine
 		divine = new Currency("divine", "https://www.pathofexile.com/trade/exchange/Metamorph/NpeJc0",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/9z28fK");
+				"https://www.pathofexile.com/trade/exchange/Metamorph/9z28fK", 3, 1);
 		currencies.add(divine);
 		//vaal
 		vaal = new Currency("vaal", "https://www.pathofexile.com/trade/exchange/Metamorph/EB9LC5",
@@ -144,7 +145,7 @@ public class Main {
 		currencies.add(silver);
 		//exalted
 		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/glRewPiQ",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip");
+				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip", 3, 3);
 		currencies.add(exa);
 		
 		for (int i = 0; i < currencies.size(); i++) {

@@ -25,7 +25,7 @@ public class Currency implements Comparable<Currency>{
 		sellPriceArr = new double[20];
 		buyStockArr = new double[20];
 		sellStockArr = new double[20];
-		minStock = 1000;
+		minStock = Defines.DEFAULT_MINIMUM_STOCK;
 		offset = 0;
 	}
 	
@@ -41,8 +41,7 @@ public class Currency implements Comparable<Currency>{
 
 	public double calcProfit() {
 		double profit = buyPriceArr[buyIndex] - sellPriceArr[sellIndex];
-		profitRatio = (int)((profit / sellPriceArr[sellIndex]) * 1000);
-		profitRatio = profitRatio / 10;
+		profitRatio = Math.round((profit / sellPriceArr[sellIndex]) * 1000) / 10;
 		return profitRatio;
 	}
 	
@@ -58,7 +57,7 @@ public class Currency implements Comparable<Currency>{
 		} else if (sellResults > 20 && sellIndex > 12) {
 			sellPrice = sellPriceArr[15];
 		} else {
-			sellPrice = sellPriceArr[sellIndex + 1];
+			sellPrice = sellPriceArr[sellIndex];
 		}
 		
 		return sellPrice;
@@ -66,7 +65,7 @@ public class Currency implements Comparable<Currency>{
 	
 	public void updateIndex() {
 		buyIndex = getMinStockIndex(buyStockArr, minStock);
-		sellIndex = getMinStockIndex(sellStockArr, 100);
+		sellIndex = getMinStockIndex(sellStockArr, Defines.MINIMUM_BUYER_CHAOS);
 	}
 	
 	//==========================internal===================================
@@ -75,14 +74,6 @@ public class Currency implements Comparable<Currency>{
 		double sum = 0, count = 0, differencePercentage;
 		int index = 0;
 
-		//filter out low stocks
-		for (int i = 0; i < 20; i++) {
-			if (amount[i] < minAmount) {
-				index = i;
-			} else {
-				break;
-			}
-		}
 		while (true) {
 			for (int i = 1; i < (((results - index) < 5) ? (results - index) : 5); i++) {
 				sum += price[i + index];
@@ -115,12 +106,15 @@ public class Currency implements Comparable<Currency>{
 	@Override
 	public String toString() {
 		calcProfit();
-		String str = name + ": " + profitRatio + "%   ";
-		str += "buy: " + buyPrice + " " + name + "/c   ";
-		str += "sell: " + sellPrice + " c/" + name;
+		String str = name + " - Minimum profit: " + profitRatio + "%   ";
+		str += "Lowest buy: " + buyPriceArr[buyIndex] + " " + name + "/c   ";
+		str += "Selected buy: " + buyPrice + " " + name + "/c   ";
+		str += "Lowest sell: " + sellPriceArr[sellIndex] + " c/" + name;
+		str += "Selected sell: " + sellPrice + " c/" + name;
 		
 		return str;
 	}
+	
 	@Override
 	public int compareTo(Currency o) {
 		return this.profitRatio < o.profitRatio ? -1 : (this.profitRatio > o.profitRatio ? 1: 0);
