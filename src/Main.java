@@ -22,18 +22,18 @@ public class Main {
 
 		//main
 		print("======================running..");
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < currencies.size(); i++) {
 			handle.parse(currencies.get(i));
-			System.out.println(currencies.get(i).getName());
-			System.out.println(currencies.get(i).calcProfit());
+			System.out.println(currencies.get(i));
 		}
 		
 		//sort by descending profit then add top 5 to bestCurrencies
 		Collections.sort(currencies, Collections.reverseOrder());
 		for(int i = 0; i < 2; i++) {
 			bestCurrencies.add(currencies.get(i));
+			System.out.print(currencies.get(i).getName() + " ^ ");
 		}
-		
+		System.out.println();
 		String forumPost = handle.updateShopThread(bestCurrencies, bestCurrencies.size());
 		System.out.println(forumPost);
 		
@@ -99,63 +99,63 @@ public class Main {
 		
 		//alteration
 		alt = new Currency("alt", "https://www.pathofexile.com/trade/exchange/Metamorph/AjnbtX",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/yXeeiR");
+				"https://www.pathofexile.com/trade/exchange/Metamorph/Ny7gfR");
 		currencies.add(alt);
 		//fusing
 		fuse = new Currency("fuse", "https://www.pathofexile.com/trade/exchange/Metamorph/jW58VLUX",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/5M2osa");
+				"https://www.pathofexile.com/trade/exchange/Metamorph/V5VkVdSp");
 		currencies.add(fuse);
 		//jewellers
 		jew = new Currency("jew", "https://www.pathofexile.com/trade/exchange/Metamorph/LgdYhn",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/Yo07hY");
+				"https://www.pathofexile.com/trade/exchange/Metamorph/1EpVu5");
 		currencies.add(jew);
 		//alchemy
 		alch = new Currency("alch", "https://www.pathofexile.com/trade/exchange/Metamorph/rPe7CQ",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/Rwoqi7");
+				"https://www.pathofexile.com/trade/exchange/Metamorph/yYYOiR");
 		currencies.add(alch);
 		//gcp
-		gcp = new Currency("gcp", "https://www.pathofexile.com/trade/exchange/Metamorph/6oJbTG",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/B22wf8");
+		gcp = new Currency("gcp", "https://www.pathofexile.com/trade/exchange/Metamorph/18jvcV",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/ADa4f5");
 		currencies.add(gcp);
 		//chromatic
-		chrom = new Currency("chrom", "https://www.pathofexile.com/trade/exchange/Metamorph/eLabsL",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/qWRPSg");
+		chrom = new Currency("chrom", "https://www.pathofexile.com/trade/exchange/Metamorph/AePWsL",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/AMKqTJ");
 		currencies.add(chrom);
 		//chance
-		chance = new Currency("chance", "https://www.pathofexile.com/trade/exchange/Metamorph/D6mLdS5",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/bYoGiL");
+		chance = new Currency("chance", "https://www.pathofexile.com/trade/exchange/Metamorph/0YR8Ig",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/X3JBsP");
 		currencies.add(chance);
 		//chisel
-		chisel = new Currency("chisel", "https://www.pathofexile.com/trade/exchange/Metamorph/EL9yT5",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/l3wjiV");
+		chisel = new Currency("chisel", "https://www.pathofexile.com/trade/exchange/Metamorph/4my8I9",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/zbVRF4");
 		currencies.add(chisel);
 		//scouring
-		scour = new Currency("scour", "https://www.pathofexile.com/trade/exchange/Metamorph/3D7GU5",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/b5VKIL");
+		scour = new Currency("scour", "https://www.pathofexile.com/trade/exchange/Metamorph/EBEzt5",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/rbdMHQ");
 		currencies.add(scour);
 		//divine
-		divine = new Currency("divine", "https://www.pathofexile.com/trade/exchange/Metamorph/Eov4F5",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/19pKtK");
+		divine = new Currency("divine", "https://www.pathofexile.com/trade/exchange/Metamorph/NpeJc0",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/9z28fK");
 		currencies.add(divine);
 		//vaal
-		vaal = new Currency("vaal", "https://www.pathofexile.com/trade/exchange/Metamorph/54XoTa",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/poMXU0");
+		vaal = new Currency("vaal", "https://www.pathofexile.com/trade/exchange/Metamorph/EB9LC5",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/18GVuV");
 		currencies.add(vaal);
 		//regret
-		regret = new Currency("regret", "https://www.pathofexile.com/trade/exchange/Metamorph/q2qvCg",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/L2yGun");
+		regret = new Currency("regret", "https://www.pathofexile.com/trade/exchange/Metamorph/9z6ztK",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/zbJai4");
 		currencies.add(regret);
 		//glassblower
-		ba = new Currency("ba", "https://www.pathofexile.com/trade/exchange/Metamorph/O73rCE",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/X3l9RsP");
+		ba = new Currency("ba", "https://www.pathofexile.com/trade/exchange/Metamorph/3q5Jc5",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/v089CE");
 		currencies.add(ba);
 		//silver coin
-		silver = new Currency("silver", "https://www.pathofexile.com/trade/exchange/Metamorph/p6XXt0",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/q2YPCg");
+		silver = new Currency("silver", "https://www.pathofexile.com/trade/exchange/Metamorph/XL5BFP",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/6zEkUG");
 		currencies.add(silver);
 		//exalted
-		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/zavrGvU4",
-				"https://www.pathofexile.com/trade/exchange/Metamorph/b8vDrLHL");
+		exa = new Currency("exa", "https://www.pathofexile.com/trade/exchange/Metamorph/glRewPiQ",
+				"https://www.pathofexile.com/trade/exchange/Metamorph/V59BW2Ip");
 		currencies.add(exa);
 	}
 }

@@ -42,8 +42,6 @@ public class Currency implements Comparable<Currency>{
 	public double calcProfit() {
 		buyPrice = buyPriceArr[buyIndex];
 		sellPrice = sellPriceArr[sellIndex];
-		System.out.println("Buy price index: " + buyIndex + " Sell price index: " + sellIndex);
-		System.out.println("Buy price: " + buyPriceArr[buyIndex] + " Sell price: " + sellPriceArr[sellIndex]);
 		double profit = buyPriceArr[buyIndex] - sellPriceArr[sellIndex];
 		profitRatio = (int)((profit / sellPriceArr[sellIndex]) * 1000);
 		profitRatio = profitRatio / 10;
@@ -112,7 +110,15 @@ public class Currency implements Comparable<Currency>{
 		
 		return stock.length - 1;
 	}
-	
+	@Override
+	public String toString() {
+		calcProfit();
+		String str = name + ": " + profitRatio + "%   ";
+		str += "buy: " + buyPrice + " " + name + "/c   ";
+		str += "sell: " + sellPrice + " c/" + name;
+		
+		return str;
+	}
 	@Override
 	public int compareTo(Currency o) {
 		return this.profitRatio < o.profitRatio ? -1 : (this.profitRatio > o.profitRatio ? 1: 0);
