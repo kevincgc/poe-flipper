@@ -11,34 +11,44 @@ public class Main {
 		initiateCurrency();
 
 		//initiate website
-		WebsiteHandler handle = new WebsiteHandler(Defines.POESESSID);
-
-		//main
-		print("======================running..");
-		for (int i = 0; i < currencies.size(); i++) {
-			handle.parse(currencies.get(i));
-			currencies.get(i).calcBuyPrice();
-			currencies.get(i).calcSellPrice();
-			currencies.get(i).calcProfit();
-			System.out.println(currencies.get(i));
-		}
-
-		//sort by descending profit then sell those with profit ratio > 40%
-		Collections.sort(currencies, Collections.reverseOrder());
-		System.out.print("Selected profitable currencies: ");
-		for(Currency c: currencies) {
-			if (c.getProfitRatio() > Defines.LOWEST_ALLOWED_PROFIT_RATIO) {
-				profitableCurrencies.add(c);
-				System.out.print(c.getName() + ", ");
+		WebsiteHandler handle = new WebsiteHandler();
+		
+		int runCounter = 0;
+		while (true) {
+			handle.initiateHandler();
+			
+			//main
+			print("======================running..  #" + runCounter++ + " time");
+			for (int i = 0; i < currencies.size(); i++) {
+				handle.parse(currencies.get(i));
+				currencies.get(i).calcBuyPrice();
+				currencies.get(i).calcSellPrice();
+				currencies.get(i).calcProfit();
+				System.out.println(currencies.get(i));
 			}
+
+			//sort by descending profit then sell those with profit ratio > 40%
+			Collections.sort(currencies, Collections.reverseOrder());
+			System.out.print("Selected profitable currencies: ");
+			for(Currency c: currencies) {
+				if (c.getProfitRatio() > Defines.LOWEST_ALLOWED_PROFIT_RATIO) {
+					profitableCurrencies.add(c);
+					System.out.print(c.getName() + ", ");
+				}
+			}
+			
+			String forumPost = handle.updateShopThread(profitableCurrencies, profitableCurrencies.size());
+			System.out.println("\n" + forumPost);
+			
+			//cleanup
+			handle.exit();
+			print("======================done..");
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			
+			Thread.sleep(2 * 60 * 1000);
 		}
-		
-		String forumPost = handle.updateShopThread(profitableCurrencies, profitableCurrencies.size());
-		System.out.println("\n" + forumPost);
-		
-		//cleanup
-		handle.exit();
-		print("======================done..");
 	}
 
 	public static void print(String string) {

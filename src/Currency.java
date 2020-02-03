@@ -117,10 +117,10 @@ public class Currency implements Comparable<Currency> {
 	@Override
 	public String toString() {
 		calcProfit();
-		String str = name + " - Minimum profit: " + profitRatio + "%   ";
-		str += "Lowest buy: " + buyPriceArr[buyIndex] + " " + name + "/c   ";
-		str += "Selected buy: " + buyPrice + " " + name + "/c   ";
-		str += "Lowest sell: " + sellPriceArr[sellIndex] + " c/" + name;
+		String str = name + " - Minimum profit: " + profitRatio + "%  ";
+		str += "Lowest buy: " + buyPriceArr[buyIndex] + " " + name + "/c  ";
+		str += "Selected buy: " + buyPrice + " " + name + "/c  ";
+		str += "Lowest sell: " + sellPriceArr[sellIndex] + " c/" + name + "  ";
 		str += "Selected sell: " + sellPrice + " c/" + name;
 
 		return str;
