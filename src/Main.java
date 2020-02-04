@@ -9,6 +9,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		//initiate currency
 		initiateCurrency();
+		currencyOverride();
 
 		//initiate website
 		WebsiteHandler handle = new WebsiteHandler();
@@ -28,7 +29,7 @@ public class Main {
 			}
 
 			//sort by descending profit then sell those with profit ratio > 40%
-			Collections.sort(currencies, Collections.reverseOrder());
+//			Collections.sort(currencies, Collections.reverseOrder());
 			System.out.print("Selected profitable currencies: ");
 			for(Currency c: currencies) {
 				if (c.getProfitRatio() > Defines.LOWEST_ALLOWED_PROFIT_RATIO) {
@@ -49,6 +50,17 @@ public class Main {
 			
 			Thread.sleep(2 * 60 * 1000);
 		}
+	}
+	
+	public static void currencyOverride () {
+		divine.setMinStock(2);
+		divine.setOffset(2);
+		exa.setMinStock(3);
+		exa.setOffset(5);
+		aug.setOverrideSellPrice(8);
+		wis.setOverrideBuyPrice(105);
+		wis.setOverrideSellPrice(40);
+		port.setOverrideBuyPrice(30);
 	}
 
 	public static void print(String string) {
@@ -165,10 +177,5 @@ public class Main {
 			currencies.get(i).setSellX((i / 12) + 2);
 			currencies.get(i).setSellY(i - (i / 12) * 12);
 		}
-		divine.setMinStock(2);
-		divine.setOffset(2);
-		exa.setMinStock(3);
-		exa.setOffset(5);
-		aug.setOverrideSellPrice(8);
 	}
 }

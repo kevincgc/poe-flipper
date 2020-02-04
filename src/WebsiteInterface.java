@@ -16,7 +16,7 @@ public class WebsiteInterface {
 	private ChromeOptions options;
 	private WebDriver driver;
 
-	public WebsiteInterface() {
+	public void initiateInterface() {
 		System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 		options = new ChromeOptions();
 		options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080", "--ignore-certificate-errors",

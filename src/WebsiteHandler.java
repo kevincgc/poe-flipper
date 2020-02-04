@@ -9,6 +9,7 @@ public class WebsiteHandler {
 	private static WebsiteInterface w = new WebsiteInterface(); // limit to 1 instance of headless chrome running
 
 	public void initiateHandler() throws InterruptedException {
+		w.initiateInterface();
 		w.goTo("https://www.pathofexile.com/");
 		Cookie cookie = new Cookie.Builder("POESESSID", Defines.POESESSID).domain(".pathofexile.com").path("/").isSecure(true)
 				.build();
